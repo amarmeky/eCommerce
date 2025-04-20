@@ -1,0 +1,20 @@
+body .login {
+    width: 500px;
+    margin: 500px auto ;
+}
+body{
+    background-color: rgb(235, 235, 247) !important;
+
+}
+body .login input{
+    margin-bottom: 10px;
+    font-size: larger;
+}
+body .login .form-control{
+    background-color: rgb(236, 224, 224);
+
+}
+body .login .btn{
+    background-color: rgb(39, 92, 192);
+    
+}
