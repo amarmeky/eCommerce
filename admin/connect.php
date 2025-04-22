@@ -9,7 +9,7 @@ $options = array(
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 );
 try {
-    $conn = new PDO($dsn, $username, $password, $options);
+    $con = new PDO($dsn, $username, $password, $options);
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
