@@ -1,33 +1,28 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // نحصل على كل الـ input اللي فيها placeholder
-  const inputs = document.querySelectorAll('input[placeholder]');
+/*
+//hide placeholder on focus and show it on blur//
+var myInput= document.getElementById("user");
+myInput.onfocus = function() {
+    'use strict';
+    this.setAttribute('data-place',this.getAttribute('placeholder'));
+    this.setAttribute('placeholder','');
+    console.log("gfhfhfhf");
+};
+myInput.onblur = function() {
+    'use strict';
+    this.setAttribute('placeholder',this.getAttribute('data-place'));
+    this.setAttribute('data-place','');
+}
+*/
 
-  inputs.forEach(function(input) {
-    // نخزن قيمة الـ placeholder الأصلية
-    input.dataset.placeholder = input.placeholder;
 
-    // عند focus (لما المستخدم يضغط على الحقل)
-    input.addEventListener('focus', function () {
-      input.placeholder = '';
+//hide placeholder on focus and show it on blur//
+$(function(){
+    'use strict';
+    $('[placeholder]').focus(function() {
+        $(this).attr('data-place', $(this).attr('placeholder'));
+        $(this).attr('placeholder', '');
+    }).blur(function() {
+        $(this).attr('placeholder', $(this).attr('data-place'));
+        $(this).attr('data-place', '');
     });
-
-    // عند blur (لما يخرج من الحقل)
-    input.addEventListener('blur', function () {
-      input.placeholder = input.dataset.placeholder;
-    });
-
-    // عند مرور الماوس (hover)
-    input.addEventListener('mouseenter', function () {
-      if (document.activeElement !== input) {
-        input.placeholder = '';
-      }
-    });
-
-    // لما يشيل الماوس
-    input.addEventListener('mouseleave', function () {
-      if (document.activeElement !== input) {
-        input.placeholder = input.dataset.placeholder;
-      }
-    });
-  });
-});
+})
