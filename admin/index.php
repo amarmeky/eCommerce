@@ -1,4 +1,12 @@
 <?php
+// Start session
+session_start();
+// Include database connection file 
+if (isset($_SESSION['username'])) {
+    header('Location: dashboard.php');//redirect to dashboard page
+} else {
+    header('Location: login.php');//redirect to login page
+};
 include 'init.php';
 include $tpl. "header.php";
 include "includes/languages/en.php";
@@ -14,11 +22,14 @@ if($_SERVER['REQUEST_METHOD']=="POST")
     $stmt= $con->prepare("SELECT UserName,Password FROM users WHERE Username=? AND Password=? AND GroupID=1 "); 
     $stmt->execute(array($user,$hashedpass));
     $count= $stmt->rowCount();
-    //check if count > 0 this mean the user exist in database
+    //get the user data from database
     if($count>0){
-        echo 'welcome '.$user . $hashedpass;
-    }
+        $_SESSION['username']= $user; //Register session name
+        header('Location: dashboard.php'); //redirect to dashboard page
+        exit();
+    }  
 }
+
 ?>
 <form class="login" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
     <h4 class="text-center">Admin Login</h4>

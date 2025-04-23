@@ -1,9 +1,16 @@
 body .login {
     width: 500px;
-    margin: 500px auto ;
+    margin: 0px auto ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+
+
 }
 body{
-    background-color: rgb(235, 235, 247) !important;
+    background-color: rgb(154, 154, 170) !important;
 
 }
 body .login input{
