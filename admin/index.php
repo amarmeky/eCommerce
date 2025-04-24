@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');//redirect to dashboard page
 } else {
-    header('Location: login.php');//redirect to login page
+    header('Location: index.php');//redirect to login page
 };
 include 'init.php';
 include $tpl. "header.php";
