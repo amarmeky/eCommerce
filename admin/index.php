@@ -1,15 +1,13 @@
 <?php
 // Start session
 session_start();
+$noNavbar="";
 // Include database connection file 
 if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');//redirect to dashboard page
-} else {
-    header('Location: index.php');//redirect to login page
-};
+} 
 include 'init.php';
-include $tpl. "header.php";
-include "includes/languages/en.php";
+
 
 
 //check if user coming fom http post request
