@@ -2,8 +2,13 @@
 // English Language File
 function lang($phrase) {
     static $lang = array(
-        "MESSAGE" => "Welcome to our company",
-        "ADMIN"=> "amar",
-    );
-    return $lang[$phrase];
+//dashboard page
+'Admin_home'=>'home',
+'Categorys'=>'categorys',
+'Profile'=>'amar',
+'Edit_Profile'=>'edite profile',
+'Setting'=>'setting',
+'Logout'=> 'logout',
+);
+return $lang[$phrase];
 }
