@@ -3,26 +3,35 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse mx-4" id="app-nav">
-        <ul class="navbar-nav mr-auto">
+    <a class="navbar-brand  " href="#" ><?php echo lang('ADMAIN_HOME') ?> </a>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#" ><?php echo lang('Admin_home')?> </a>
-            </li>
-
+    <div class="collapse navbar-collapse " id="app-nav">
+        <ul class="nav navbar-nav  ">
             <li class="nav-item">
-                <a class="nav-link" href="#"><?php echo lang('Categorys')?> </a>
+                <a class="nav-link" href="#"><?php echo lang('CATEGORES') ?> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><?php echo lang('ITEMS') ?> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><?php echo lang('MEMBERS') ?> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><?php echo lang('STATISTICS') ?> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><?php echo lang('LOGS') ?> </a>
             </li>
         </ul>
-        <ul class="navbar-nav ">
+        <ul class=" nav navbar-nav  navbar-right ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo lang('profile')?>
+                    <?php echo lang('PROFILE') ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><?php echo lang('Edit_Profile')?></a>
-                    <a class="dropdown-item" href="#"><?php echo lang('Setting')?></a>
-                    <a class="dropdown-item" href="#"><?php echo lang('Logout')?></a>
+                    <a class="dropdown-item" href="#"><?php echo lang('EDIT_PROFILE') ?></a>
+                    <a class="dropdown-item" href="#"><?php echo lang('SETTINGS') ?></a>
+                    <a class="dropdown-item" href="#"><?php echo lang('LOGOUT') ?></a>
                 </div>
             </li>
         </ul>
