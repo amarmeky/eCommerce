@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand  " href="#" ><?php echo lang('ADMAIN_HOME') ?> </a>
+    <a class="navbar-brand  " href="#"><?php echo lang('ADMAIN_HOME') ?> </a>
 
     <div class="collapse navbar-collapse " id="app-nav">
         <ul class="nav navbar-nav  ">
@@ -29,11 +29,11 @@
                     <?php echo lang('PROFILE') ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><?php echo lang('EDIT_PROFILE') ?></a>
+                    <a class="dropdown-item" href="members.php?do=Edit&id=<?php echo $_SESSION['id'] ?>"><?php echo lang('EDIT_PROFILE') ?></a>
                     <a class="dropdown-item" href="#"><?php echo lang('SETTINGS') ?></a>
                     <a class="dropdown-item" href="logout.php"><?php echo lang('LOGOUT') ?></a>
                 </div>
-            </li> 
+            </li>
         </ul>
     </div>
 </nav>
