@@ -1,6 +1,7 @@
 <?php
 // Start session
 session_start();
+$pageTitle = 'Dashboard';
 // Check if user is logged in   
 if (isset($_SESSION['username'])) {
     include 'init.php'; 

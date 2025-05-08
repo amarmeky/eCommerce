@@ -2,6 +2,7 @@
 // Start session
 session_start();
 $noNavbar="";
+$pageTitle = 'Login'; //Page Title
 // Include database connection file 
 if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');//redirect to dashboard page
