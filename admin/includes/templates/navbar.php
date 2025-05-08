@@ -31,9 +31,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#"><?php echo lang('EDIT_PROFILE') ?></a>
                     <a class="dropdown-item" href="#"><?php echo lang('SETTINGS') ?></a>
-                    <a class="dropdown-item" href="#"><?php echo lang('LOGOUT') ?></a>
+                    <a class="dropdown-item" href="logout.php"><?php echo lang('LOGOUT') ?></a>
                 </div>
-            </li>
+            </li> 
         </ul>
     </div>
 </nav>
