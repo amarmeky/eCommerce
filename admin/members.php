@@ -30,8 +30,10 @@ if (isset($_SESSION['username'])) {
             //Show the edit form
 ?>
             <h1 class="text-center">Edit Member</h1>
-            <div class="container">
-                <form class="form-horizontal">
+            <div class="container" >
+                <form class="form-horizontal" action="?do=Update" method="POST">
+                    <!-- Start hidden field to store the user id -->
+                    <input type="hidden" name="userid" value="<?php echo $userid ?>" />
                     <!-- Start Username Field -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Username</label>
@@ -44,7 +46,7 @@ if (isset($_SESSION['username'])) {
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" name="email" value="<?php echo $row['Email'] ?>" class="form-control" required="required" placeholder="Email" />
+                            <input type="email" name="email" value="<?php echo $row['Email'] ?>" autocomplete="off" class="form-control" required="required" placeholder="Email" />
                         </div>
                     </div>
                     <!-- End Email Field -->
@@ -60,7 +62,7 @@ if (isset($_SESSION['username'])) {
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Full Name</label>
                         <div class="col-sm-10">
-                            <input type="text" name="fullname" class="form-control" value="<?php echo $row['FullName'] ?>" required="required" placeholder="Full Name" />
+                            <input type="text" name="fullname" class="form-control" value="<?php echo $row['FullName'] ?>" autocomplete="off" required="required" placeholder="Full Name" />
                         </div>
                     </div>
                     <!-- End Email Field -->
@@ -91,9 +93,25 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </form>
             </div>
-
-<?php } else { //if the user id not exist in database
-            echo "back";
+            <?php } else { //if the user id not exist in database
+            echo "thers no such id";
+        }
+    }elseif($do=="Update"){
+        echo "<h1 class='text-center'>Update Member</h1>";
+        //update the user data in database
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $id=$_POST['userid'];
+            $username=$_POST['username'];
+            $email=$_POST['email'];
+            $password=$_POST['password'];
+            $fullname=$_POST['fullname'];
+            //uPdate the user data in database
+            $stmt=$con->prepare("UPDATE users SET UserName=?,Email=?,Password=?,FullName=? WHERE UserID=?");
+            $stmt->execute(array($username,$email,sha1($password),$fullname,$id));
+            //echo success message
+            echo $stmt->rowCount(). "record updated";
+        }else{
+            echo "you can not access this page directly";
         }
     }
     include $tpl . 'footer.php';
