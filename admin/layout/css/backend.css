@@ -80,3 +80,15 @@ body .login .btn {
 }
 
 /* end bootstrap edit */
+/*start members page*/
+.container{
+    font-size: 22px;
+
+}
+.form-control{
+    font-size: 18px;
+} 
+.btn{
+    font-size: 20px;
+} 
+/*end members page*/

@@ -4,11 +4,14 @@
 **has varible $pageTitle
 */
 
-function getTitle(){
+function getTitle()
+{
     global $pageTitle;
-    if(isset($pageTitle)){
+    if (isset($pageTitle)) {
         echo $pageTitle;
-    }else{
+    } else {
         echo 'Default';
     }
 }
+
+
