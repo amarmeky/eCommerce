@@ -54,7 +54,8 @@ if (isset($_SESSION['username'])) {
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" name="password" class="form-control" autocomplete="off" required="required" placeholder="Password" />
+                            <input type="hidden" name="oldpassword" value="<?php echo $row['Password'] ?>" />
+                            <input type="password" name="newpassword" class="form-control" autocomplete="off"  placeholder="Password" />
                         </div>
                     </div>
                     <!-- End Password Field -->
@@ -103,11 +104,17 @@ if (isset($_SESSION['username'])) {
             $id=$_POST['userid'];
             $username=$_POST['username'];
             $email=$_POST['email'];
-            $password=$_POST['password'];
             $fullname=$_POST['fullname'];
+            //password hashing
+            $pass="";
+            if(empty($_POST['newpassword'])){
+                $pass=$_POST['oldpassword'];
+            }else{
+                $pass=sha1($_POST['newpassword']);
+            }
             //uPdate the user data in database
-            $stmt=$con->prepare("UPDATE users SET UserName=?,Email=?,Password=?,FullName=? WHERE UserID=?");
-            $stmt->execute(array($username,$email,sha1($password),$fullname,$id));
+            $stmt=$con->prepare("UPDATE users SET UserName=?,Email=?,FullName=? ,Password=? WHERE UserID=?");
+            $stmt->execute(array($username,$email,$fullname, $pass,$id));
             //echo success message
             echo $stmt->rowCount(). "record updated";
         }else{
