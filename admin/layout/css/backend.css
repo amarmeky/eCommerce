@@ -4,6 +4,13 @@ body {
     font-size: 16px !important;
 
 }
+.asterisk{
+    color: #cd1111;
+    font-size: 29px;
+    right: 27px;
+    top: 2px;
+    position: absolute;
+}
 
 /*end main rules */
 /* start login form */
@@ -78,6 +85,10 @@ body .login .btn {
     color: #ffffff;
     background-color: #d81761;
 }
+.form-control{
+    font-size: 18px;
+    position: relative;
+} 
 
 /* end bootstrap edit */
 /*start members page*/
@@ -85,9 +96,7 @@ body .login .btn {
     font-size: 22px;
 
 }
-.form-control{
-    font-size: 18px;
-} 
+
 .btn{
     font-size: 20px;
 } 
