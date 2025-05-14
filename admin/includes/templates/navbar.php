@@ -11,10 +11,10 @@
                 <a class="nav-link" href="#"><?php echo lang('CATEGORES') ?> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><?php echo lang('ITEMS') ?> </a>
+                <a class="nav-link" href="items.php"><?php echo lang('ITEMS') ?> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><?php echo lang('MEMBERS') ?> </a>
+                <a class="nav-link" href="members.php"><?php echo lang('MEMBERS') ?> </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><?php echo lang('STATISTICS') ?> </a>
