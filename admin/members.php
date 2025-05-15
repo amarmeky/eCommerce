@@ -18,7 +18,7 @@ if (isset($_SESSION['username'])) {
         echo "<a href=members.php?do=Add class=btn btn-primary >Add Member</a>";
     } elseif ($do == "Add") { //Add members page
 ?>
-        
+
         <h1 class="text-center">Add Member</h1>
         <div class="container">
             <form class="form-horizontal" action="?do=Insert" method="POST">
@@ -43,43 +43,43 @@ if (isset($_SESSION['username'])) {
                     <label class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
                         <input type="password" name="password" class=" password form-control" autocomplete="off" placeholder="Please enter a strong password." required="required" />
-                        <i class="show-pass fa fa-eye  " ></i>
+                        <i class="show-pass fa fa-eye  "></i>
                     </div>
                 </div>
                 <!-- End Password Field -->
                 <!-- Start full Name Field -->
                 <div class=" form-group">
-                            <label class="col-sm-2 control-label">Full Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="fullname" class="form-control" autocomplete="off" placeholder="Please enter your full name" required="required" />
-                            </div>
+                    <label class="col-sm-2 control-label">Full Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="fullname" class="form-control" autocomplete="off" placeholder="Please enter your full name" required="required" />
                     </div>
-                    <!-- End full Name Field -->
-                    <!-- Start Submit/Cancel/reset Button -->
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <!-- Start Submit Button -->
-                            <input type="submit" name="save" class="btn btn-primary" value="Add Member" />
-                            <!-- End Submit Button -->
-                            <!-- Start reset Button -->
-                            <input type="button" class="btn btn-secondary" value="Reset" onclick="clearForm(this.form)" />
-                            <script>
-                                function clearForm(form) {
-                                    const inputs = form.querySelectorAll('input');
-                                    inputs.forEach(input => {
-                                        if (input.type !== 'submit' && input.type !== 'button' && input.type !== 'reset') {
-                                            input.value = '';
-                                        }
-                                    });
-                                }
-                            </script>
-                            <!-- End reset Button -->
-                            <!-- Start Cancel Button -->
-                            <input type="button" value="Cancel" class="btn btn-danger" onclick="history.back();" />
-                            <!-- End cancel Button -->
-                        </div>
-                        <!-- End Submit/cancel/reset Button -->
+                </div>
+                <!-- End full Name Field -->
+                <!-- Start Submit/Cancel/reset Button -->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <!-- Start Submit Button -->
+                        <input type="submit" name="save" class="btn btn-primary" value="Add Member" />
+                        <!-- End Submit Button -->
+                        <!-- Start reset Button -->
+                        <input type="button" class="btn btn-secondary" value="Reset" onclick="clearForm(this.form)" />
+                        <script>
+                            function clearForm(form) {
+                                const inputs = form.querySelectorAll('input');
+                                inputs.forEach(input => {
+                                    if (input.type !== 'submit' && input.type !== 'button' && input.type !== 'reset') {
+                                        input.value = '';
+                                    }
+                                });
+                            }
+                        </script>
+                        <!-- End reset Button -->
+                        <!-- Start Cancel Button -->
+                        <input type="button" value="Cancel" class="btn btn-danger" onclick="history.back();" />
+                        <!-- End cancel Button -->
                     </div>
+                    <!-- End Submit/cancel/reset Button -->
+                </div>
             </form>
         </div>
         <?php } elseif ($do == "Insert") {
@@ -118,8 +118,8 @@ if (isset($_SESSION['username'])) {
             }
             //check if there is no error in the form then update the user data in database
             if (empty($formErrors)) {
-                //uPdate the user data in database
-                $stmt = $con->prepare("INSERT INTO users SET UserName=?,Email=?,FullName=? ,Password=?");
+                //Insert the user data in database
+                $stmt = $con->prepare("INSERT INTO users (UserName,Email,FullName,Password) VALUES(?,?,?,?)");
                 $stmt->execute(array($username, $email, $fullname, $hass_pass));
                 //echo success message
                 echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record Inserted Successfully </div>';
@@ -165,7 +165,7 @@ if (isset($_SESSION['username'])) {
                         <div class="col-sm-10">
                             <input type="hidden" name="oldpassword" value="<?php echo $row['Password'] ?>" />
                             <input type="password" name="newpassword" class=" password form-control" autocomplete="off" placeholder="Please enter a strong password." required="required" />
-                        <i class="show-pass fa fa-eye  " ></i>
+                            <i class="show-pass fa fa-eye  "></i>
                         </div>
                     </div>
                     <!-- End Password Field -->
