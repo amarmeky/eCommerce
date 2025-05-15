@@ -18,6 +18,7 @@ if (isset($_SESSION['username'])) {
         echo "<a href=members.php?do=Add class=btn btn-primary >Add Member</a>";
     } elseif ($do == "Add") { //Add members page
 ?>
+        
         <h1 class="text-center">Add Member</h1>
         <div class="container">
             <form class="form-horizontal" action="?do=Insert" method="POST">
@@ -41,9 +42,8 @@ if (isset($_SESSION['username'])) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" autocomplete="off" placeholder="Please enter a strong password." required="required" />
-                        <!-- <i class=" " ></i> -->
-                         
+                        <input type="password" name="password" class=" password form-control" autocomplete="off" placeholder="Please enter a strong password." required="required" />
+                        <i class="show-pass fa fa-eye  " ></i>
                     </div>
                 </div>
                 <!-- End Password Field -->
@@ -164,7 +164,8 @@ if (isset($_SESSION['username'])) {
                         <label class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="oldpassword" value="<?php echo $row['Password'] ?>" />
-                            <input type="password" name="newpassword" class="form-control" autocomplete="off" placeholder="Leave the password if you dont to change " />
+                            <input type="password" name="newpassword" class=" password form-control" autocomplete="off" placeholder="Please enter a strong password." required="required" />
+                        <i class="show-pass fa fa-eye  " ></i>
                         </div>
                     </div>
                     <!-- End Password Field -->

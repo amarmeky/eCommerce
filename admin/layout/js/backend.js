@@ -13,5 +13,13 @@ $(function(){
         if ($(this).attr('required') === 'required') {
             $(this).after('<span class="asterisk">*</span>');
         }
+    }); 
+    var passwordField = $('.password');
+    $('.show-pass').hover(function() {
+        passwordField.attr('type', 'text');
+    }, function() {
+        passwordField.attr('type', 'password'); 
     });
+
+
 });
