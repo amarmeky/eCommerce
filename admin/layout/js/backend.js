@@ -1,25 +1,28 @@
 //hide placeholder on focus and show it on blur//
-$(function(){
+$(function () {
     'use strict';
-    $('[placeholder]').focus(function() {
+    $('[placeholder]').focus(function () {
         $(this).attr('data-place', $(this).attr('placeholder'));
         $(this).attr('placeholder', '');
-    }).blur(function() {
+    }).blur(function () {
         $(this).attr('placeholder', $(this).attr('data-place'));
         $(this).attr('data-place', '');
     });
-//Add asterisk to required fields//
-    $('input').each(function() {
+    //Add asterisk to required fields//
+    $('input').each(function () {
         if ($(this).attr('required') === 'required') {
             $(this).after('<span class="asterisk">*</span>');
         }
-    }); 
+    });
     var passwordField = $('.password');
-    $('.show-pass').hover(function() {
+    $('.show-pass').hover(function () {
         passwordField.attr('type', 'text');
-    }, function() {
-        passwordField.attr('type', 'password'); 
+    }, function () {
+        passwordField.attr('type', 'password');
     });
 
+    $('.confirm').click(function () {
+        return confirm("Are you sure you want to delete this record?");
+    })
 
 });

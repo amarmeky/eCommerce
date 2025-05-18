@@ -106,4 +106,8 @@ body .login .btn {
     right: 45px;
     top: 10px;
 }
+.main-table tr:first-child td{
+background-color: #333;
+    color: #fff;
+}
 /*end members page*/
