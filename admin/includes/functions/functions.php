@@ -13,5 +13,10 @@ function getTitle()
         echo 'Default';
     }
 }
-
-
+function redirectHome($meesage, $secound = 3)
+{
+    echo '<div class="alert alert-danger">' . $meesage . '</div>';
+    echo '<div class="alert alert-info">You Will Be Redirected After ' . $secound . ' Seconds</div>';
+    header("refresh:$secound;url=dashboard.php");
+    exit();
+}
