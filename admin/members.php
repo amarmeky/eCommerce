@@ -22,7 +22,7 @@ if (isset($_SESSION['username'])) {
 ?>
         <h1 class="text-center">Manage Members</h1>
         <div class="container">
-            <a href="members.php?do=Add" class="btn btn-primary mb-2"> <i class="fa fa-plus "> </i> Add Member</a>
+            <a href="members.php?do=Add" class="btn btn-primary mb-2"> <i class="fa fa-plus "> </i> New Member</a>
             <div class="table-responsive">
                 <table class="main-table table table-bordered  text-center">
                     <tr>
@@ -43,8 +43,8 @@ if (isset($_SESSION['username'])) {
                         echo "<td>" . $row["FullName"] . "</td>";
                         echo "<td>" . "</td>";
                         echo "<td>
-<a href='members.php?do=Edit&id=$row[UserID]' class='btn btn-success'>Edit</a>
-<a href='members.php?do=Delete&id=$row[UserID]' class='btn btn-danger confirm'>Delete</a>
+<a href='members.php?do=Edit&id=$row[UserID]' class='btn btn-success'> <i class = 'fa fa-edit'></i>Edit</a>
+<a href='members.php?do=Delete&id=$row[UserID]' class='btn btn-danger confirm'><i class = 'fa fa-close'></i>Delete</a>
 </td>";
                         echo "</tr>";
                     }
@@ -150,14 +150,20 @@ if (isset($_SESSION['username'])) {
                         foreach ($formErrors as $error) {
                             echo '<div class ="alert alert-danger">' . $error . '</div>';
                         }
-                        //check if there is no error in the form then update the user data in database
+                        //check if there is no error in the form then insert the user data in database
                         if (empty($formErrors)) {
+                            //check if the user exist in database
+                            $check=checkItem('Email', 'users', $email);
+                                if ($check == 1) {
+                                    echo '<div class ="alert alert-danger">Sorry this Email is already exist</div>';
+                                }else{
                             //Insert the user data in database
                             $stmt = $con->prepare("INSERT INTO users (UserName,Email,FullName,Password) VALUES(?,?,?,?)");
                             $stmt->execute(array($username, $email, $fullname, $hass_pass));
                             //echo success message
                             echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record Inserted Successfully </div>';
                         }
+                    }
                     } else {
                         redirectHome('you can not access this page directly', 6);
                     }
@@ -241,7 +247,7 @@ if (isset($_SESSION['username'])) {
     <?php } else { //if the user id not exist in database
                         redirectHome('theres no such id', 6);
                     }
-                } elseif ($do == "Update") {
+                } elseif ($do == "Update") {//Update page
                     echo "<h1 class='text-center'>Update Member</h1>";
                     echo "<div class='container'>";
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -272,12 +278,18 @@ if (isset($_SESSION['username'])) {
                         }
                         //check if there is no error in the form then update the user data in database
                         if (empty($formErrors)) {
+                            //check if the user exist in database
+                            $check=checkItem('Email', 'users', $email);
+                                if ($check == 1) {
+                                    echo '<div class ="alert alert-danger">Sorry this Email is already exist</div>';
+                                }else{
                             //uPdate the user data in database
                             $stmt = $con->prepare("UPDATE users SET UserName=?,Email=?,FullName=? ,Password=? WHERE UserID=?");
                             $stmt->execute(array($username, $email, $fullname, $pass, $id));
                             //echo success message
                             echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record updated</div>';
                         }
+                    }
                     } else {
                         redirectHome('you can not access this page directly', 6);
                     }
