@@ -12,21 +12,36 @@ function getTitle()
         echo 'Default';
     }
 }
+
 /*
-**home redirect function v1.0
+**home redirect function v2.0
 **this function accept parameters
-**$meesage = echo the message
+**$meesage = echo the message[success, error, ...]
 **$secound = seconds to redirect
 **$url = the url to redirect to
 */
-
-function redirectHome($meesage, $secound = 3)
+function redirectHome($meesage,$url=null, $secound = 3)
 {
-    echo '<div class="alert alert-danger">' . $meesage . '</div>';
-    echo '<div class="alert alert-info">You Will Be Redirected After ' . $secound . ' Seconds</div>';
-    header("refresh:$secound;url=dashboard.php");
+    if($url==null){
+        $url = 'index.php';
+        $link = 'Home Page';
+    }else{
+        if(isset($_SERVER['HTTP_REFERER'])&& $_SERVER['HTTP_REFERER']!=""){
+            $url = $_SERVER['HTTP_REFERER'];
+            $link = 'Previous Page';
+        }
+        else{
+            $url = 'index.php';
+            $link = 'Home Page';
+        }
+    }
+    echo $meesage ;
+    echo "<div class='alert alert-info'>You Will Be Redirected to $link After   $secound  Seconds</div>";
+    header("refresh:$secound;url=$url");
     exit();
 }
+
+
 /*check item function v1.0
 **this function accept parameters
 **$select = the item to select[user, item, ...]

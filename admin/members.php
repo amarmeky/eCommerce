@@ -1,5 +1,4 @@
 <?php
-
 /*
 ==manage members page
 == you can add | edit | delete members from here
@@ -7,7 +6,6 @@
 // Start session
 session_start();
 $pageTitle = 'Members'; //Page Title
-
 // Check if user is logged in   
 if (isset($_SESSION['username'])) {
     include 'init.php';
@@ -43,9 +41,9 @@ if (isset($_SESSION['username'])) {
                         echo "<td>" . $row["FullName"] . "</td>";
                         echo "<td>" . "</td>";
                         echo "<td>
-<a href='members.php?do=Edit&id=$row[UserID]' class='btn btn-success'> <i class = 'fa fa-edit'></i>Edit</a>
-<a href='members.php?do=Delete&id=$row[UserID]' class='btn btn-danger confirm'><i class = 'fa fa-close'></i>Delete</a>
-</td>";
+                            <a href='members.php?do=Edit&id=$row[UserID]' class='btn btn-success'> <i class = 'fa fa-edit'></i>Edit</a>
+                    <a href='members.php?do=Delete&id=$row[UserID]' class='btn btn-danger confirm'><i class = 'fa fa-close'></i>Delete</a>
+                            </td>";
                         echo "</tr>";
                     }
                     ?>
@@ -148,24 +146,29 @@ if (isset($_SESSION['username'])) {
                         }
                         //loop over errors and echo them
                         foreach ($formErrors as $error) {
-                            echo '<div class ="alert alert-danger">' . $error . '</div>';
+                            $mes = "<div class ='alert alert-danger'>$error </div>";
+                            redirectHome($mes, 'back', secound: 6);
                         }
                         //check if there is no error in the form then insert the user data in database
                         if (empty($formErrors)) {
                             //check if the user exist in database
-                            $check=checkItem('Email', 'users', $email);
-                                if ($check == 1) {
-                                    echo '<div class ="alert alert-danger">Sorry this Email is already exist</div>';
-                                }else{
-                            //Insert the user data in database
-                            $stmt = $con->prepare("INSERT INTO users (UserName,Email,FullName,Password) VALUES(?,?,?,?)");
-                            $stmt->execute(array($username, $email, $fullname, $hass_pass));
-                            //echo success message
-                            echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record Inserted Successfully </div>';
+                            $check = checkItem('Email', 'users', $email);
+                            if ($check == 1) {
+                                $mes = '<div class ="alert alert-danger">Sorry this Email is already exist</div>';
+                                redirectHome($mes, 'back', secound: 6);
+                            } else {
+                                //Insert the user data in database
+                                $stmt = $con->prepare("INSERT INTO users (UserName,Email,FullName,Password) VALUES(?,?,?,?)");
+                                $stmt->execute(array($username, $email, $fullname, $hass_pass));
+                                $row = $stmt->rowCount();
+                                //echo success message
+                                $mes = "<div class='alert alert-success'> $row record Inserted Successfully </div>";
+                                redirectHome($mes, 'back', secound: 6);
+                            }
                         }
-                    }
                     } else {
-                        redirectHome('you can not access this page directly', 6);
+                        $mes = "<div class ='alert alert-danger'>you can not access this page directly</div>";
+                        redirectHome($mes, 'back', secound: 6);
                     }
                     echo "</div>";
                 } elseif ($do == "Edit") {     //Edit page 
@@ -245,9 +248,12 @@ if (isset($_SESSION['username'])) {
                     </form>
                 </div>
     <?php } else { //if the user id not exist in database
-                        redirectHome('theres no such id', 6);
+                        echo "<div class='container'>";
+                        $mes = "<div class ='alert alert-danger'>theres no such id</div>";
+                        redirectHome($mes, 'back', secound: 6);
+                        echo "</div>";
                     }
-                } elseif ($do == "Update") {//Update page
+                } elseif ($do == "Update") { //Update page
                     echo "<h1 class='text-center'>Update Member</h1>";
                     echo "<div class='container'>";
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -274,24 +280,22 @@ if (isset($_SESSION['username'])) {
                         }
                         //loop over errors and echo them
                         foreach ($formErrors as $error) {
-                            echo '<div class ="alert alert-danger">' . $error . '</div>';
+                            $mes = "<div class ='alert alert-danger'> $error  </div>";
+                            redirectHome($mes, 'back', secound: 6);
                         }
                         //check if there is no error in the form then update the user data in database
                         if (empty($formErrors)) {
-                            //check if the user exist in database
-                            $check=checkItem('Email', 'users', $email);
-                                if ($check == 1) {
-                                    echo '<div class ="alert alert-danger">Sorry this Email is already exist</div>';
-                                }else{
                             //uPdate the user data in database
                             $stmt = $con->prepare("UPDATE users SET UserName=?,Email=?,FullName=? ,Password=? WHERE UserID=?");
                             $stmt->execute(array($username, $email, $fullname, $pass, $id));
+                            $row = $stmt->rowCount();
                             //echo success message
-                            echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record updated</div>';
+                            $mes = "<div class='alert alert-success'> $row   record updated</div>";
+                            redirectHome($mes, 'back', 6);
                         }
-                    }
                     } else {
-                        redirectHome('you can not access this page directly', 6);
+                        $mes = "div class ='alert alert-danger'>you can not access this page directly</div>";
+                        redirectHome($mes, 'back', 6);
                     }
                     echo "</div>";
                 } elseif ($do == "Delete") {
@@ -308,10 +312,13 @@ if (isset($_SESSION['username'])) {
                         //delete the user data in database
                         $stmt = $con->prepare("DELETE FROM users WHERE UserID=?");
                         $stmt->execute(array($userid));
+                        $row = $stmt->rowCount();
                         //echo success message
-                        echo '<div class="alert alert-success">' . $stmt->rowCount() . '   record deleted</div>';
+                        $mes = "<div class='alert alert-success'>$row record deleted</div>";
+                        redirectHome($mes, 'back', secound: 6);
                     } else {
-                        redirectHome('theres no such id', 6);
+                        $mes = "<div class ='alert alert-danger'>theres no such id</div>";
+                        redirectHome($mes, 6);
                     }
                 }
                 include $tpl . 'footer.php';
